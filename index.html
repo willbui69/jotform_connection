@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+</head>
+<body>
+  <p style="font-family: Arial; text-align: center; margin-top: 50px;">
+    Checking your information. Please wait...
+  </p>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const tfn_last3 = params.get("tfn_last3");
+    const spouse_dob = params.get("spouse_dob");
+
+    fetch("https://script.google.com/macros/s/AKfycbymjeHbP4m9l-IRmdS_WM0CcL7G6P3JPUcgpWodWk3tKbcCVANOvROIDg13d-kpm0uwWg/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ tfn_last3, spouse_dob })
+})
+    .then(res => res.text())
+    .then(link => {
+      window.location.href = link;
+    })
+    .catch(err => {
+      alert("Something went wrong. Please contact support.");
+      console.error(err);
+    });
+  </script>
+</body>
+</html>
