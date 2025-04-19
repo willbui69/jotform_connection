@@ -14,19 +14,18 @@
     const tfn_last3 = params.get("tfn_last3");
     const spouse_dob = params.get("spouse_dob");
 
-    fetch("https://script.google.com/macros/s/AKfycbymjeHbP4m9l-IRmdS_WM0CcL7G6P3JPUcgpWodWk3tKbcCVANOvROIDg13d-kpm0uwWg/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ tfn_last3, spouse_dob })
-})
-    .then(res => res.text())
-    .then(link => {
-      window.location.href = link;
-    })
-    .catch(err => {
-      alert("Something went wrong. Please contact support.");
-      console.error(err);
-    });
+    const GAS_URL = "https://script.google.com/macros/s/AKfycby50JLBUKj7-J0i35ZRE_0DI8yWLNJcjc4AHNmTVf3fLM06V7cxxbH-ENaUG8NRVtlhKw/exec";
+
+    // Redirect by appending query params via GET
+    fetch(`${GAS_URL}?tfn_last3=${encodeURIComponent(tfn_last3)}&spouse_dob=${encodeURIComponent(spouse_dob)}`)
+      .then(res => res.text())
+      .then(link => {
+        window.location.href = link;
+      })
+      .catch(err => {
+        alert("Something went wrong. Please contact support.");
+        console.error(err);
+      });
   </script>
 </body>
 </html>
